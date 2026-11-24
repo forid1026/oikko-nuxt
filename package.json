@@ -1,0 +1,32 @@
+{
+  "name": "oikko",
+  "private": true,
+  "type": "module",
+  "version": "0.1.0",
+  "description": "ঐক্য (Oikko) — স্বেচ্ছাসেবী সংগঠনের static ওয়েবসাইট",
+  "scripts": {
+    "dev": "nuxt dev",
+    "build": "nuxt build",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "typecheck": "nuxt typecheck",
+    "postinstall": "nuxt prepare"
+  },
+  "dependencies": {
+    "@nuxt/content": "^3.17.0",
+    "@nuxt/fonts": "^1.2.0",
+    "@nuxt/image": "^2.2.1",
+    "@nuxtjs/sitemap": "^9.1.0",
+    "@tailwindcss/vite": "^4.3.5",
+    "better-sqlite3": "^13.2.0",
+    "nuxt": "^4.6.4",
+    "tailwindcss": "^4.3.5",
+    "vue": "^3.5.46",
+    "vue-router": "^5.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.6",
+    "typescript": "^5.9.3",
+    "vue-tsc": "^3.0.0"
+  }
+}

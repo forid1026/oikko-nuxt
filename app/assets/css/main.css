@@ -1,0 +1,308 @@
+@import 'tailwindcss';
+
+/*
+ * বাংলা অঙ্কের (০১২৩৪৫৬৭৮৯) জন্য আলাদা ফন্ট: Hind Siliguri-তে অঙ্ক (বিশেষ করে ১) ছোট আকারে ভেঙে যায়।
+ * Noto Sans Bengali থেকে শুধু ১০টি অঙ্ক কেটে (প্রায় ৪ KB) নেওয়া হয়েছে, বাকি সব বাংলা অক্ষর Hind Siliguri-তেই থাকে।
+ * unicode-range-এর কারণে শুধু অঙ্ক থাকলেই এই ফাইল লোড হয়।
+ */
+@font-face {
+  font-family: 'Bn Digits';
+  src: url('/fonts/noto-bengali-digits.woff2') format('woff2');
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: block; /* ছোট ফাইল আগে থেকে লোড হয়; অঙ্ক কখনো Hind Siliguri-র হরফে ঝলকে না */
+  unicode-range: U+09E6-09EF;
+}
+
+/*
+ * ডিজাইন টোকেন (Tailwind v4 @theme)
+ * `--color-*: initial` দিয়ে Tailwind-এর ডিফল্ট রঙ সরানো হয়েছে, যাতে শুধু ব্র্যান্ডের রঙই থাকে।
+ * ব্যবহার: bg-blue, text-navy, bg-green-700, border-sky-700 ইত্যাদি।
+ */
+@theme {
+  --color-*: initial;
+  --color-white: #ffffff;
+  --color-black: #000000;
+  --color-transparent: transparent;
+  --color-current: currentColor;
+
+  --color-blue: #064f80;
+  --color-blue-900: #043a5e;
+  --color-green: #62ae4b;
+  --color-green-700: #3e7d2c;
+  --color-sky: #2aa7e0;
+  --color-sky-700: #0b7bb5;
+  --color-pink: #b01e55;
+  --color-orange: #f5a323;
+  --color-yellow: #ffbb33;
+  --color-navy: #0b2a40;
+  --color-bg: #fbfcfd;
+  --color-surface: #f1f6fa;
+
+  /* পুরো সাইটে একটিই ফন্ট: Hind Siliguri (ওজন ৪০০/৫০০/৬০০/৭০০) */
+  --font-sans: 'Bn Digits', 'Hind Siliguri', 'Noto Sans Bengali', system-ui, sans-serif;
+  --font-display: 'Bn Digits', 'Hind Siliguri', 'Noto Sans Bengali', system-ui, sans-serif;
+
+  --radius-card: 20px;
+  --shadow-card: 0 10px 30px -12px rgba(6, 79, 128, 0.18);
+  --shadow-card-hover: 0 18px 36px -14px rgba(6, 79, 128, 0.28);
+}
+
+/* ---------- বেস ---------- */
+@layer base {
+  html {
+    font-family: 'Bn Digits', 'Hind Siliguri', 'Noto Sans Bengali', system-ui, sans-serif;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    font-kerning: normal;
+    font-feature-settings: 'liga' 1, 'calt' 1;
+    font-synthesis: none; /* নকল bold/italic নয়: বাংলা অক্ষর ভাঙে */
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem; /* sticky header-এর নিচে anchor লুকাবে না */
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-navy);
+    font-family: var(--font-sans);
+    font-size: 1.0625rem; /* ১৭px */
+    line-height: 1.75; /* বাংলা যুক্তাক্ষর ও কারের জন্য */
+    font-weight: 400;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    color: var(--color-navy);
+    line-height: 1.35; /* heading-এ কোনো letter-spacing নেই */
+    letter-spacing: 0;
+  }
+
+  h1 {
+    font-size: clamp(2.2rem, 5vw, 4rem);
+    font-weight: 700;
+  }
+  h2 {
+    font-size: clamp(1.6rem, 3vw, 2.5rem);
+    font-weight: 700;
+  }
+  h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+  }
+
+  p,
+  li {
+    line-height: 1.75;
+  }
+
+  button,
+  input,
+  textarea,
+  select {
+    font-family: inherit;
+    letter-spacing: 0;
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--color-sky-700);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+
+  ::selection {
+    background: var(--color-sky);
+    color: var(--color-navy);
+  }
+}
+
+/* ---------- কম্পোনেন্ট ---------- */
+@layer components {
+  .container-page {
+    @apply mx-auto w-full max-w-6xl px-4 sm:px-6;
+  }
+
+  .section {
+    @apply py-16 md:py-24;
+  }
+  .section-alt {
+    background-color: var(--color-surface);
+  }
+
+  /* কার্ড: radius ২০px, হালকা shadow, hover-এ উঠে যায় */
+  .card {
+    @apply rounded-card bg-white shadow-card;
+    transition:
+      transform 200ms ease,
+      box-shadow 200ms ease;
+  }
+  .card-hover:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-card-hover);
+  }
+
+  /* বাটন: pill আকার */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 font-semibold;
+    transition:
+      background-color 200ms ease,
+      color 200ms ease,
+      border-color 200ms ease,
+      transform 200ms ease;
+  }
+  .btn:active {
+    transform: scale(0.98);
+  }
+  .btn-primary {
+    @apply bg-blue text-white;
+  }
+  .btn-primary:hover {
+    @apply bg-blue-900;
+  }
+  .btn-outline {
+    @apply border-2 border-blue bg-transparent text-blue;
+  }
+  .btn-outline:hover {
+    @apply bg-blue text-white;
+  }
+  /* "দান করুন" সবসময় কমলা/হলুদ + গাঢ় নীল লেখা */
+  .btn-donate {
+    @apply bg-orange text-navy;
+  }
+  .btn-donate:hover {
+    @apply bg-yellow;
+  }
+
+  /* পাঁচ রঙের gradient bar — পুরো সাইটে সর্বোচ্চ একবার */
+  .gradient-bar {
+    background: linear-gradient(
+      90deg,
+      var(--color-blue),
+      var(--color-sky),
+      var(--color-green),
+      var(--color-yellow),
+      var(--color-pink)
+    );
+  }
+
+  /* স্বাবলম্বন ক্যাটাগরি: blue → green */
+  .bg-selfreliance {
+    background: linear-gradient(135deg, var(--color-blue), var(--color-green-700));
+  }
+
+  /* লেখার ছবিতে --blue থেকে স্বচ্ছ overlay */
+  .img-overlay::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(6, 79, 128, 0.85), rgba(6, 79, 128, 0) 65%);
+    pointer-events: none;
+  }
+
+  /* keyboard ব্যবহারকারীর জন্য "মূল অংশে যান" লিংক */
+  .skip-link {
+    @apply bg-blue text-white;
+    position: absolute;
+    left: 1rem;
+    top: -4rem;
+    z-index: 100;
+    padding: 0.75rem 1.25rem;
+    border-radius: 9999px;
+    transition: top 200ms ease;
+  }
+  .skip-link:focus {
+    top: 1rem;
+  }
+}
+
+/* ---------- scroll-reveal (Reveal কম্পোনেন্ট ধাপ ২-এ আসবে) ---------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity 600ms ease,
+    transform 600ms ease;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ---------- সংযত অ্যানিমেশন: reduced-motion হলে সব বন্ধ ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ---------- প্রকল্পের Markdown লেখা (ContentRenderer) ---------- */
+.prose-oikko h2 {
+  margin-top: 2rem;
+  font-size: 1.5rem;
+}
+.prose-oikko p {
+  margin-top: 1rem;
+}
+.prose-oikko ul {
+  margin-top: 1rem;
+  padding-left: 1.5rem;
+  list-style: disc;
+}
+.prose-oikko ol {
+  margin-top: 1rem;
+  padding-left: 1.5rem;
+  list-style: decimal;
+}
+.prose-oikko li {
+  margin-top: 0.4rem;
+}
+.prose-oikko a {
+  color: var(--color-sky-700);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.prose-oikko blockquote {
+  margin-top: 1.25rem;
+  padding: 1rem 1.25rem;
+  border-left: 4px solid var(--color-sky);
+  background: var(--color-surface);
+  border-radius: 12px;
+}
+
+/* ---------- skeleton (লোড হওয়ার সময়ের ঝিলিক) ----------
+ * ছবি বা অন্য অংশের জায়গায় .skeleton দিলে নরম shimmer দেখায়। ছবি লোড হয়ে এলে সেটি এর উপরে বসে যায়।
+ * reduced-motion হলে নড়াচড়া নেই, শুধু স্থির নরম রঙ। */
+.skeleton {
+  background-color: #e6eef4;
+  background-image: linear-gradient(100deg, #e6eef4 30%, #f7fafc 50%, #e6eef4 70%);
+  background-size: 220% 100%;
+  animation: skeleton-shimmer 1.5s linear infinite;
+}
+@keyframes skeleton-shimmer {
+  from {
+    background-position: 120% 0;
+  }
+  to {
+    background-position: -120% 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .skeleton {
+    animation: none;
+    background-image: none;
+  }
+}
