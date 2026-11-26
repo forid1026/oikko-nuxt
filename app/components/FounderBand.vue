@@ -4,6 +4,7 @@ import { founder } from '~/data/founder'
 
 <template>
   <section class="relative isolate overflow-hidden bg-blue text-white" aria-label="প্রতিষ্ঠাতার বার্তা">
+    <span class="stitch-frame" aria-hidden="true" />
     <!-- সাজসজ্জা: নরম আলো, জ্যামিতিক আকার ও বিশাল উদ্ধৃতি-চিহ্ন -->
     <div class="pointer-events-none absolute -left-24 -top-24 -z-10 h-80 w-80 rounded-full bg-sky/35 blur-3xl" aria-hidden="true" />
     <div class="pointer-events-none absolute -bottom-32 -right-16 -z-10 h-96 w-96 rounded-full bg-green/30 blur-3xl" aria-hidden="true" />

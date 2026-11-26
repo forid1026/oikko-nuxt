@@ -24,12 +24,12 @@ const initial = computed(() => Array.from(props.member.name.trim())[0] ?? '?')
       :width="variant === 'card' ? 112 : 56"
       :height="variant === 'card' ? 112 : 56"
       loading="lazy"
-      class="skeleton shrink-0 rounded-full object-cover object-top"
+      class="avatar-stitch skeleton shrink-0 rounded-full object-cover object-top"
       :class="variant === 'card' ? 'h-28 w-28' : 'h-14 w-14'"
     />
     <div
       v-else
-      class="flex shrink-0 items-center justify-center rounded-full font-bold"
+      class="avatar-stitch flex shrink-0 items-center justify-center rounded-full font-bold"
       :class="[tone, variant === 'card' ? 'h-28 w-28 text-4xl' : 'h-14 w-14 text-xl']"
       role="img"
       :aria-label="`${member.name}-এর avatar`"

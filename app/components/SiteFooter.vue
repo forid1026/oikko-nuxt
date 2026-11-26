@@ -5,8 +5,8 @@ import { site, navItems } from '~/data/site'
 
 <template>
   <footer class="bg-blue-900 text-white">
-    <!-- পাঁচ রঙের bar: পুরো সাইটে শুধু এই একবার -->
-    <div class="gradient-bar h-1.5" aria-hidden="true" />
+    <!-- পাঁচ রঙের সেলাই-রেখা -->
+    <span class="stitch !h-1.5 !rounded-none" aria-hidden="true" />
 
     <div class="container-page grid gap-10 py-14 md:grid-cols-2 lg:grid-cols-4">
       <div class="lg:col-span-2">
@@ -60,7 +60,7 @@ import { site, navItems } from '~/data/site'
 
     <div class="border-t border-white/15">
       <div class="container-page flex flex-col gap-2 py-5 text-sm text-white/80 sm:flex-row sm:items-center sm:justify-between">
-        <p>© ঐক্য (Oikko)। সর্বস্বত্ব সংরক্ষিত।</p>
+        <p>© ঐক্য (Oikko)। সর্বস্বত্ব সংরক্ষিত।<template v-if="site.registration"> · {{ site.registration }}</template></p>
         <p>{{ site.domain }} · ২০১৫ থেকে মানবতার পাশে</p>
       </div>
     </div>

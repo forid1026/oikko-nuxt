@@ -132,9 +132,9 @@
     background-color: var(--color-surface);
   }
 
-  /* কার্ড: radius ২০px, হালকা shadow, hover-এ উঠে যায় */
+  /* কার্ড: radius ২০px, সূক্ষ্ম রেখা + হালকা shadow, hover-এ উঠে যায় */
   .card {
-    @apply rounded-card bg-white shadow-card;
+    @apply rounded-card border border-blue/10 bg-white shadow-card;
     transition:
       transform 200ms ease,
       box-shadow 200ms ease;
@@ -216,6 +216,48 @@
   .skip-link:focus {
     top: 1rem;
   }
+}
+
+/* ---------- কাঁথা-সেলাই: ঐক্যের নকশা-ভাষা ----------
+ * ছোট ছোট টুকরো জুড়ে একটি কাঁথা: ঠিক যেমন এক-এক জন মানুষ জুড়ে "ঐক্য"।
+ * .stitch = লোগোর পাঁচ রঙের সেলাই-রেখা (ভাগ করার দাগ), .stitch-frame = ভেতরের সেলাই-ফ্রেম (রঙিন জমিনে)।
+ * .tile = কাঁথার এক-একটি রঙিন টুকরো। এই তিনটিই সাইটের একমাত্র সাজসজ্জা: বাকি সব শান্ত রাখা হয়েছে। */
+.stitch {
+  display: block;
+  height: 5px;
+  border-radius: 3px;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--color-blue) 0 14px, transparent 14px 21px,
+    var(--color-green) 21px 35px, transparent 35px 42px,
+    var(--color-yellow) 42px 56px, transparent 56px 63px,
+    var(--color-pink) 63px 77px, transparent 77px 84px,
+    var(--color-sky) 84px 98px, transparent 98px 105px
+  );
+}
+.stitch-frame {
+  position: absolute;
+  inset: 12px;
+  border: 2px dashed rgba(255, 255, 255, 0.55);
+  border-radius: 16px;
+  pointer-events: none;
+}
+.stitch-frame-dark {
+  border-color: rgba(6, 79, 128, 0.28);
+}
+.tile {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border-radius: 22px;
+}
+.balance {
+  text-wrap: balance;
+}
+/* অবতার/ছবির চারপাশে সেলাই-রিং */
+.avatar-stitch {
+  outline: 2px dashed var(--color-blue);
+  outline-offset: 4px;
 }
 
 /* ---------- scroll-reveal (Reveal কম্পোনেন্ট ধাপ ২-এ আসবে) ---------- */

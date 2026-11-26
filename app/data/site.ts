@@ -14,6 +14,8 @@ export const site = {
   url: 'https://oikko-awo.com', // TODO: ডোমেইন চূড়ান্ত হলে নিশ্চিত করুন
   domain: 'oikko-awo.com',
   foundedYear: 2015,
+  // সরকারি নিবন্ধন নম্বর (থাকলে লিখুন, যেমন: 'সমাজসেবা অধিদপ্তর নিবন্ধন নং ...')। খালি থাকলে কোথাও দেখানো হয় না।
+  registration: '' as string,
   address: 'তেঁতুলিয়া, পঞ্চগড়, বাংলাদেশ',
   email: 'oikko.awo@gmail.com',
   phoneDisplay: '০১৭৩৮-৭৩৩৭৪৫',

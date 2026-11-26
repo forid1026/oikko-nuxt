@@ -19,12 +19,8 @@ const barColor = { blue: 'bg-blue', green: 'bg-green', sky: 'bg-sky', pink: 'bg-
 <template>
   <div :class="props.align === 'center' ? 'mx-auto max-w-2xl text-center' : 'max-w-2xl'">
     <p v-if="eyebrow" class="mb-2 text-sm font-semibold" :class="eyebrowColor[props.accent]">{{ eyebrow }}</p>
-    <component :is="props.as">{{ title }}</component>
-    <span
-      class="mt-4 block h-1 w-14 rounded-full"
-      :class="[barColor[props.accent], props.align === 'center' ? 'mx-auto' : '']"
-      aria-hidden="true"
-    />
+    <component :is="props.as" class="balance">{{ title }}</component>
+    <span class="stitch mt-5 w-28" :class="props.align === 'center' ? 'mx-auto' : ''" aria-hidden="true" />
     <p v-if="subtitle" class="mt-4 text-lg text-navy/80">{{ subtitle }}</p>
   </div>
 </template>

@@ -12,10 +12,10 @@ const projects = computed(() => (data.value ?? []) as ProjectItem[])
 
 // TODO: ভিশনের বাক্যটি আমি মিশন থেকে সাজিয়েছি। আপনাদের নিজস্ব ভিশন থাকলে সেটি বসান।
 const values = [
-  { icon: 'heart' as const, title: 'মানবতা', text: 'প্রতিটি মানুষ সমান মর্যাদার যোগ্য, এই বিশ্বাস থেকেই আমাদের সব কাজ।', tone: 'bg-pink text-white' },
-  { icon: 'check' as const, title: 'সততা ও স্বচ্ছতা', text: 'দাতার প্রতিটি টাকার হিসাব আমরা খোলামেলাভাবে জানাতে চাই।', tone: 'bg-blue text-white' },
-  { icon: 'users' as const, title: 'সহযাত্রা', text: 'যাদের পাশে দাঁড়াই, তাঁরা আমাদের সহযাত্রী। আমরা করুণা নয়, সম্মান নিয়ে কাজ করি।', tone: 'bg-green-700 text-white' },
-  { icon: 'home' as const, title: 'স্বাবলম্বন', text: 'লক্ষ্য শুধু সাহায্য নয়, মানুষকে নিজের পায়ে দাঁড়াতে সহায়তা করা।', tone: 'bg-sky-700 text-white' },
+  { icon: 'heart' as const, title: 'মানবতা', text: 'প্রতিটি মানুষ সমান মর্যাদার যোগ্য, এই বিশ্বাস থেকেই আমাদের সব কাজ।', tone: 'bg-pink text-white', badge: 'bg-white text-pink' },
+  { icon: 'check' as const, title: 'সততা ও স্বচ্ছতা', text: 'দাতার প্রতিটি টাকার হিসাব আমরা খোলামেলাভাবে জানাতে চাই।', tone: 'bg-blue text-white', badge: 'bg-white text-blue' },
+  { icon: 'users' as const, title: 'সহযাত্রা', text: 'যাদের পাশে দাঁড়াই, তাঁরা আমাদের সহযাত্রী। আমরা করুণা নয়, সম্মান নিয়ে কাজ করি।', tone: 'bg-green-700 text-white', badge: 'bg-white text-green-700' },
+  { icon: 'home' as const, title: 'স্বাবলম্বন', text: 'লক্ষ্য শুধু সাহায্য নয়, মানুষকে নিজের পায়ে দাঁড়াতে সহায়তা করা।', tone: 'bg-sky-700 text-white', badge: 'bg-white text-sky-700' },
 ]
 </script>
 
@@ -66,10 +66,11 @@ const values = [
         <SectionHeading eyebrow="যা আমরা মানি" title="আমাদের মূল্যবোধ" accent="green" />
         <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           <Reveal v-for="(v, i) in values" :key="v.title" :delay="i * 80">
-            <div class="card h-full p-6">
-              <span class="mb-4 flex h-12 w-12 items-center justify-center rounded-full" :class="v.tone"><AppIcon :name="v.icon" :size="24" /></span>
-              <h3>{{ v.title }}</h3>
-              <p class="mt-2 text-navy/80">{{ v.text }}</p>
+            <div class="tile h-full p-7 shadow-card" :class="v.tone">
+              <span class="stitch-frame" aria-hidden="true" />
+              <span class="relative mb-4 flex h-12 w-12 items-center justify-center rounded-full" :class="v.badge"><AppIcon :name="v.icon" :size="24" /></span>
+              <h3 class="relative" style="color: inherit">{{ v.title }}</h3>
+              <p class="relative mt-2 opacity-95">{{ v.text }}</p>
             </div>
           </Reveal>
         </div>
@@ -95,6 +96,7 @@ const values = [
             <p class="mt-3 text-lg text-navy/85">
               আপনার দান কোথায় কীভাবে ব্যবহার হলো, তা জানার অধিকার আপনার আছে। আমরা নিয়মিত কাজের খবর ও দানের হিসাব ফেসবুক পেজে জানাতে চাই।
             </p>
+            <p v-if="site.registration" class="mt-4 font-semibold text-blue">{{ site.registration }}</p>
             <!-- TODO: হিসাব প্রকাশের আসল পদ্ধতি (মাসিক/বার্ষিক, কোথায়) ঠিক হলে এখানে লিখুন -->
             <a :href="site.facebookPage" target="_blank" rel="noopener noreferrer" class="btn btn-outline mt-6"><AppIcon name="facebook" :size="18" /> ফেসবুক পেজে দেখুন</a>
           </div>

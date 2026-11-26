@@ -2,6 +2,17 @@
 import { site } from '~/data/site'
 import { bankTransfer, confirmationSteps, impactTiers, isPlaceholder, mobileBanking, transparencyText, warningText } from '~/data/donation'
 
+// "কত টাকায় কী হয়": আসল অঙ্ক বসানোর আগে শুধু ডেভেলপমেন্টে দেখায়, প্রকাশিত সাইটে [ ] চিহ্নসহ লেখা যেন না যায়।
+const tiersReady = !impactTiers.some((t) => isPlaceholder(t.amount) || isPlaceholder(t.title) || isPlaceholder(t.description))
+const showTiers = tiersReady || import.meta.dev
+const tierTones = ['bg-orange text-navy', 'bg-sky text-navy', 'bg-green-700 text-white', 'bg-blue text-white']
+
+const flow = [
+  { icon: 'heart' as const, title: 'আপনি দান করেন', text: 'নিচের যেকোনো মাধ্যমে, ছোট বা বড় যেকোনো অঙ্কে।' },
+  { icon: 'users' as const, title: 'আমরা কাজে লাগাই', text: 'স্বেচ্ছাসেবীরা সরাসরি প্রয়োজনের জায়গায় পৌঁছে দেন।' },
+  { icon: 'check' as const, title: 'আপনাকে জানাই', text: 'কোন দান কোন কাজে লেগেছে, তা আমরা জানাতে চাই।' },
+]
+
 usePageSeo({
   title: 'দান করুন',
   description: 'ঐক্যের কাজে পাশে থাকুন। বিকাশ, নগদ, রকেট বা ব্যাংক ট্রান্সফারে সহজেই দান পাঠান।',
@@ -16,6 +27,24 @@ usePageSeo({
       :crumbs="[{ label: 'হোম', to: '/' }, { label: 'দান করুন' }]"
     />
 
+    <!-- দানের পথ: তিন ধাপের বিশ্বাস-রেখা -->
+    <section class="section !pb-0" aria-label="আপনার দান যেভাবে কাজ করে">
+      <div class="container-page">
+        <ol class="grid gap-4 md:grid-cols-3">
+          <li v-for="(f, i) in flow" :key="f.title">
+            <Reveal :delay="i * 90" class="h-full">
+              <div class="card relative h-full p-6 pl-20">
+                <span class="absolute left-6 top-6 flex h-11 w-11 items-center justify-center rounded-full bg-blue text-white"><AppIcon :name="f.icon" :size="22" /></span>
+                <h3 class="!text-xl">{{ f.title }}</h3>
+                <p class="mt-1 text-navy/80">{{ f.text }}</p>
+              </div>
+            </Reveal>
+          </li>
+        </ol>
+        <span class="stitch mx-auto mt-10 w-40" aria-hidden="true" />
+      </div>
+    </section>
+
     <!-- ভূমিকা -->
     <section class="section">
       <div class="container-page">
@@ -28,16 +57,19 @@ usePageSeo({
         </div>
 
         <!-- কত টাকায় কী হয় -->
-        <h2 class="mt-16 text-center !text-2xl">কত টাকায় কী হয়</h2>
-        <div class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          <Reveal v-for="(t, i) in impactTiers" :key="i" :delay="i * 80">
-            <div class="card h-full p-6 text-center">
-              <p class="font-display text-3xl font-bold text-blue">{{ t.amount }}</p>
-              <h3 class="mt-3 !text-lg">{{ t.title }}</h3>
-              <p class="mt-2 text-navy/80">{{ t.description }}</p>
-            </div>
-          </Reveal>
-        </div>
+        <template v-if="showTiers">
+          <h2 class="mt-16 text-center !text-2xl">কত টাকায় কী হয়</h2>
+          <div class="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            <Reveal v-for="(t, i) in impactTiers" :key="i" :delay="i * 80" class="h-full">
+              <div class="tile h-full p-7 text-center shadow-card" :class="tierTones[i % tierTones.length]">
+                <span class="stitch-frame" :style="tierTones[i % tierTones.length].includes('text-navy') ? 'border-color: rgba(11,42,64,.35)' : ''" aria-hidden="true" />
+                <p class="relative font-display text-4xl font-bold">{{ t.amount }}</p>
+                <h3 class="relative mt-3 !text-lg" style="color: inherit">{{ t.title }}</h3>
+                <p class="relative mt-2 opacity-95">{{ t.description }}</p>
+              </div>
+            </Reveal>
+          </div>
+        </template>
       </div>
     </section>
 
@@ -91,7 +123,7 @@ usePageSeo({
         </div>
 
         <div class="space-y-6">
-          <div class="flex gap-4 rounded-3xl border-2 border-pink bg-white p-6" role="note">
+          <div class="flex gap-4 rounded-3xl border-2 border-dashed border-pink bg-white p-6" role="note">
             <AppIcon name="alert" :size="28" class="mt-1 shrink-0 text-pink" />
             <div>
               <h3 class="text-pink">সতর্কতা</h3>

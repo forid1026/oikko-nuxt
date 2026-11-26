@@ -14,6 +14,7 @@ withDefaults(
 
 <template>
   <section class="relative isolate overflow-hidden bg-blue text-white">
+    <span class="stitch-frame" aria-hidden="true" />
     <div class="pointer-events-none absolute -right-20 -top-20 -z-10 h-64 w-64 rounded-full bg-sky/30 blur-3xl" aria-hidden="true" />
     <div class="container-page flex flex-col items-center gap-6 py-16 text-center md:py-20">
       <h2 class="max-w-2xl !text-white">{{ title }}</h2>

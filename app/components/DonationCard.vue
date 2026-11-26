@@ -11,6 +11,7 @@ const headerTone = { pink: 'bg-pink text-white', orange: 'bg-orange text-navy', 
 <template>
   <article class="card overflow-hidden">
     <h3 class="px-6 py-4 text-xl" :class="headerTone[tone]">{{ title }}</h3>
+    <span class="stitch !rounded-none" aria-hidden="true" />
     <dl class="divide-y divide-blue/10">
       <div v-for="row in rows" :key="row.label" class="flex flex-wrap items-center justify-between gap-3 px-6 py-4">
         <div class="min-w-0">

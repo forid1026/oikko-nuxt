@@ -34,14 +34,18 @@ const selfReliancePoints = [
     <PillarCards />
 
     <!-- প্রভাব -->
-    <section class="section section-alt" aria-labelledby="impact-title">
-      <div class="container-page">
-        <SectionHeading id="impact-title" eyebrow="আমাদের পথচলা" title="সংখ্যায় ঐক্য" accent="green" />
-        <div class="mt-12 grid grid-cols-2 gap-8 lg:grid-cols-4">
-          <Reveal><StatCounter :value="site.stats.people" suffix="+" label="মানুষকে সাহায্য" /></Reveal>
-          <Reveal :delay="80"><StatCounter :value="site.stats.members" suffix="+" label="সক্রিয় স্বেচ্ছাসেবী" /></Reveal>
-          <Reveal :delay="160"><StatCounter :value="site.foundedYear" plain label="সাল থেকে যাত্রা" /></Reveal>
-          <Reveal :delay="240"><StatCounter text="সারা দেশে" label="আমাদের কাজের পরিধি" /></Reveal>
+    <section class="relative isolate overflow-hidden bg-blue-900 py-16 text-white md:py-24" aria-labelledby="impact-title">
+      <span class="stitch-frame" aria-hidden="true" />
+      <div class="container-page relative">
+        <div class="mx-auto max-w-2xl text-center">
+          <h2 id="impact-title" class="balance !text-white">সংখ্যায় ঐক্য</h2>
+          <span class="stitch mx-auto mt-5 w-28" aria-hidden="true" />
+        </div>
+        <div class="mt-12 grid grid-cols-2 gap-x-6 gap-y-10 lg:grid-cols-4">
+          <Reveal><StatCounter dark :value="site.stats.people" suffix="+" label="মানুষকে সাহায্য" /></Reveal>
+          <Reveal :delay="80"><StatCounter dark :value="site.stats.members" suffix="+" label="সক্রিয় স্বেচ্ছাসেবী" /></Reveal>
+          <Reveal :delay="160"><StatCounter dark :value="site.foundedYear" plain label="সাল থেকে যাত্রা" /></Reveal>
+          <Reveal :delay="240"><StatCounter dark text="সারা দেশে" label="আমাদের কাজের পরিধি" /></Reveal>
         </div>
       </div>
     </section>
@@ -114,11 +118,12 @@ const selfReliancePoints = [
         <SectionHeading id="help-title" eyebrow="আপনিও পারেন" title="কীভাবে পাশে দাঁড়াবেন" accent="green" />
         <div class="mt-12 grid gap-6 md:grid-cols-3">
           <Reveal>
-            <div class="card flex h-full flex-col p-7">
-              <span class="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-orange text-navy"><AppIcon name="heart" :size="24" /></span>
-              <h3>দান করুন</h3>
-              <p class="mt-2 flex-1 text-navy/80">যেকোনো অঙ্কের দান কারও না কারও কাজে লাগে। মোবাইল ব্যাংকিং বা ব্যাংক থেকে সহজেই পাঠানো যায়।</p>
-              <NuxtLink to="/donate" class="btn btn-donate mt-5 self-start">দান করুন</NuxtLink>
+            <div class="tile flex h-full flex-col bg-orange p-7 text-navy shadow-card md:-mt-4 md:pb-11 md:pt-11">
+              <span class="stitch-frame" style="border-color: rgba(11,42,64,.35)" aria-hidden="true" />
+              <span class="relative mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-navy text-white"><AppIcon name="heart" :size="24" /></span>
+              <h3 class="relative">দান করুন</h3>
+              <p class="relative mt-2 flex-1">যেকোনো অঙ্কের দান কারও না কারও কাজে লাগে। মোবাইল ব্যাংকিং বা ব্যাংক থেকে সহজেই পাঠানো যায়।</p>
+              <NuxtLink to="/donate" class="btn relative mt-5 self-start bg-navy text-white hover:bg-blue-900">দান করুন</NuxtLink>
             </div>
           </Reveal>
           <Reveal :delay="100">

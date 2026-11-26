@@ -113,12 +113,13 @@ onBeforeUnmount(() => document.removeEventListener('visibilitychange', onVisibil
         <!-- লেখা পড়ার জন্য --blue-900 থেকে স্বচ্ছ overlay (সাদা লেখা, WCAG AA) -->
         <div class="absolute inset-0 bg-linear-to-t from-blue-900/95 via-blue-900/70 to-blue-900/40 md:bg-linear-to-r md:from-blue-900/95 md:via-blue-900/75 md:to-blue-900/25" />
 
+        <span class="stitch-frame !inset-4 md:!inset-6" aria-hidden="true" />
         <div class="container-page relative flex h-full flex-col justify-end pb-36 md:pb-40">
           <div class="max-w-2xl">
             <span class="step inline-block rounded-full px-4 py-1 text-sm font-semibold" :class="categories[s.category].badge" style="--i: 0">
               {{ categories[s.category].label }}
             </span>
-            <h2 class="step mt-4 !text-white" style="--i: 1; font-size: clamp(1.9rem, 4.6vw, 3.4rem)">{{ s.title }}</h2>
+            <h2 class="step balance mt-4 !text-white font-bold" style="--i: 1; font-size: clamp(2.1rem, 5.4vw, 4.1rem); line-height: 1.3">{{ s.title }}</h2>
             <p class="step mt-3 text-lg text-white/95 md:text-xl" style="--i: 2">{{ s.text }}</p>
             <div class="step mt-6 flex flex-wrap gap-3" style="--i: 3">
               <NuxtLink :to="s.href" class="btn bg-white text-blue hover:bg-surface">বিস্তারিত দেখুন <AppIcon name="arrow-right" :size="18" /></NuxtLink>
